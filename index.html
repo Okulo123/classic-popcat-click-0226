@@ -79,5 +79,41 @@
     <div class="cat-img" id="p">0202</div>
 </div>
 
+<script>
+    // 1.初始化計數器
+    let count = 0;
+
+    // 將計數器顯示到 HTML 元素，用ID抓取
+    const catImg = document.getElementById('p');
+    // 顯示計數器
+    catImg.innerText = count;
+
+    // 寫一個function來計數
+    function countUp() {
+        count++;
+    }
+    // 註冊滑鼠按下的事件
+    document.addEventListener('mousedown', function(){
+        // 2.計數器加一
+        countUp();
+        // 3.顯示計數器
+        catImg.innerText = count;
+        // 切換張嘴圖片
+        catImg.id = 'op';
+        // 當滑鼠按下，可以輪流播放 pop1-4 的 mp3
+        let audio = new Audio(`pops/pop1.mp3`);
+        audio.play();
+    });
+
+    // 放開恢復原來圖片
+    document.addEventListener('mouseup', function(){
+        catImg.id = 'p';
+    });
+
+
+
+
+</script>
+
 </body>
 </html>
