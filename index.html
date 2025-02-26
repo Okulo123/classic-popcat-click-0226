@@ -92,27 +92,38 @@
     function countUp() {
         count++;
     }
-    // 註冊滑鼠按下的事件
-    document.addEventListener('mousedown', function(){
-        // 2.計數器加一
-        countUp();
-        // 3.顯示計數器
-        catImg.innerText = count;
-        // 切換張嘴圖片
-        catImg.id = 'op';
-        // 當滑鼠按下，可以輪流播放 pop1-4 的 mp3
-        let audio = new Audio(`pops/pop1.mp3`);
-        audio.play();
+
+    // 通用事件處理函數
+    function handleEvent(eventType) {
+        if (eventType === 'down') {
+            // 2.計數器加一
+            countUp();
+            // 3.顯示計數器
+            catImg.innerText = count;
+            // 切換張嘴圖片
+            catImg.id = 'op';
+            // 播放音效
+            let audio = new Audio(`pops/pop1.mp3`);
+            audio.play();
+        } else if (eventType === 'up') {
+            // 恢復原來圖片
+            catImg.id = 'p';
+        }
+    }
+
+    // 註冊鍵盤和滑鼠事件
+    document.addEventListener('keydown', function() {
+        handleEvent('down');
     });
-
-    // 放開恢復原來圖片
-    document.addEventListener('mouseup', function(){
-        catImg.id = 'p';
+    document.addEventListener('keyup', function() {
+        handleEvent('up');
     });
-
-
-
-
+    document.addEventListener('mousedown', function() {
+        handleEvent('down');
+    });
+    document.addEventListener('mouseup', function() {
+        handleEvent('up');
+    });
 </script>
 
 </body>
